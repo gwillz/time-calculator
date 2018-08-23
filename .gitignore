@@ -1,0 +1,10 @@
+public/*
+!public/img
+dist
+*.tmp
+cache
+.tscache
+.coverage
+nyc_output
+report.html
+node_modules
