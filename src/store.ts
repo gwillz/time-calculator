@@ -54,18 +54,17 @@ function reducer(state = init_state, action: Action): State {
                     name: '',
                     calc: action.minutes ? formatHours(action.minutes) : '',
                     minutes: action.minutes || 0,
-                }), items)
+                }), items),
+                minutes: items.reduce((sum, item) => sum + item.minutes, 0),
             }
         
         case 'ITEM_EDIT':
-            items[action.index] = {
-                ...items[action.index],
-                ...action.item,
-            }
-            
             return {
                 ...state,
-                items,
+                items: (items[action.index] = {
+                    ...items[action.index],
+                    ...action.item,
+                }, items),
                 minutes: items.reduce((sum, item) => sum + item.minutes, 0),
             }
         
@@ -74,6 +73,7 @@ function reducer(state = init_state, action: Action): State {
             return {
                 ...state,
                 items,
+                minutes: items.reduce((sum, item) => sum + item.minutes, 0),
             }
         
         case 'ITEM_CLEAR':
