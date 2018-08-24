@@ -5,7 +5,6 @@ import local from 'redux-persist/lib/storage'
 import {formatHours} from './core'
 
 export interface Item {
-    name: string;
     calc: string;
     minutes: number;
 }
@@ -40,7 +39,10 @@ type Action = {
 }
 
 const init_state: State = {
-    items: [],
+    items: [{
+        calc: '',
+        minutes: 0,
+    }],
     minutes: 0,
     rate: 26,
 }
@@ -52,7 +54,6 @@ function reducer(state = init_state, action: Action): State {
             return {
                 ...state,
                 items: (items.push({
-                    name: '',
                     calc: action.minutes ? formatHours(action.minutes) : '',
                     minutes: action.minutes || 0,
                 }), items),
@@ -78,11 +79,7 @@ function reducer(state = init_state, action: Action): State {
             }
         
         case 'ITEM_CLEAR':
-            return {
-                ...state,
-                items: [],
-                minutes: 0,
-            }
+            return init_state;
         
         case 'RATE_EDIT':
             return {

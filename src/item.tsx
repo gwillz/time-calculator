@@ -4,7 +4,6 @@ import {connect, DispatchProp} from 'react-redux'
 import {calculate, formatHours} from './core'
 
 type Props = DispatchProp & {
-    name?: string;
     calc?: string;
     index: number;
     rate: number;
