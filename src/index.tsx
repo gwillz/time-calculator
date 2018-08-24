@@ -6,9 +6,9 @@ import store, {persistor} from './store'
 import App, {Loader} from './app'
 
 ReactDOM.render((
-    // <PersistGate loading={Loader()} persistor={persistor}>
+    <PersistGate loading={Loader()} persistor={persistor}>
         <Provider store={store}>
             <App/>
         </Provider>
-    // </PersistGate>
+    </PersistGate>
 ), document.getElementById('root') as HTMLElement);

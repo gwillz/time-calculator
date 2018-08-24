@@ -58,7 +58,7 @@ function reducer(state = init_state, action: Action): State {
             }
         
         case 'ITEM_REMOVE':
-            items.splice(action.index, action.index);
+            items.splice(action.index, 1);
             return {
                 ...state,
                 items,
@@ -73,8 +73,7 @@ const persist = {
 }
 
 export const store = createStore(
-    // persistReducer(persist, reducer),
-    reducer,
+    persistReducer(persist, reducer),
     // @ts-ignore
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 )
