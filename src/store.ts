@@ -14,6 +14,7 @@ export type State = {
     minutes: number;
     rate: number;
     insert?: number;
+    version: number;
 }
 
 type Action = {
@@ -45,12 +46,25 @@ const init_state: State = {
     }],
     minutes: 0,
     rate: 26,
+    version: 0,
 }
 
 function reducer(state = init_state, action: Action): State {
     let items = state.items.slice(0);
     switch (action.type) {
         case 'ITEM_NEW':
+            if (state.items.length == 1 && state.minutes == 0 && action.minutes) {
+                return {
+                    ...state,
+                    items: [{
+                        value: formatHours(action.minutes),
+                        minutes: action.minutes,
+                    }],
+                    insert: 0,
+                    minutes: action.minutes,
+                    version: state.version + 1,
+                }
+            }
             return {
                 ...state,
                 items: (items.push({
@@ -77,7 +91,10 @@ function reducer(state = init_state, action: Action): State {
             }
         
         case 'ITEM_CLEAR':
-            return init_state;
+            return {
+                ...init_state,
+                version: state.version + 1,
+            }
         
         case 'RATE_EDIT':
             return {

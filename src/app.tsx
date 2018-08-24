@@ -11,8 +11,8 @@ type Props = DispatchProp & {
     rate: number;
     minutes: number;
     insert: number | undefined;
+    version: number;
 }
-
 
 function Header() {
     return (
@@ -28,9 +28,17 @@ function Header() {
     )
 }
 
+export function Loader() {
+    return (
+        <div className='loading'>
+            Loading...
+        </div>
+    )
+}
+
 export class App extends React.Component<Props> {
     render() {
-        const {items, rate, minutes} = this.props;
+        const {items, rate, minutes, version} = this.props;
         const amount = (minutes / 60 * rate).toFixed(2);
         const hours = formatHours(minutes);
         
@@ -43,7 +51,7 @@ export class App extends React.Component<Props> {
                     {items.map((item, i) => (
                         <ItemRow
                             dispatch={this.props.dispatch}
-                            key={i} index={i}
+                            key={i + version} index={i}
                             value={item.value}
                             minutes={item.minutes}
                             rate={rate}
@@ -72,17 +80,10 @@ export class App extends React.Component<Props> {
     }
 }
 
-export function Loader() {
-    return (
-        <div className='loading'>
-            Loading...
-        </div>
-    )
-}
-
 export default connect((state: State) => ({
     items: state.items,
     rate: state.rate,
     minutes: state.minutes,
     insert: state.insert,
+    version: state.version,
 }))(App);
