@@ -94,7 +94,7 @@ export class ItemRow extends React.Component<Props, State> {
             <td>
                 <input
                     type='text'
-                    className='input is-small'
+                    className='input'
                     onChange={this.onInput}
                     value={this.state.value}
                     placeholder='1:00 + 2:30'

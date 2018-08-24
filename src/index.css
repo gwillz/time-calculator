@@ -22,6 +22,17 @@ html, body, #root {
     text-align: center;
 }
 
+.hero.is-lou {
+    background-color: #f8c206;
+    
+    & .title {
+        color: rgba(255,255,255,0.7);
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+    }
+}
+
 .inline-button {
     cursor: pointer;
     
