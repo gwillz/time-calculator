@@ -13,7 +13,7 @@ type Props = DispatchProp & {
 }
 
 type State = {
-    [name: string]: string;
+    calc: string;
 }
 
 export class ItemRow extends React.Component<Props, State> {
@@ -23,20 +23,17 @@ export class ItemRow extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            name: props.name || '',
             calc: props.calc || '',
         }
     }
     
     onInput = (event: React.SyntheticEvent<HTMLInputElement>) => {
-        let {name, value} = event.currentTarget;
-        
-        if (this.state[name] === value) return;
-        
+        let {value} = event.currentTarget;
         value = value.replace(/\./, ':').replace(/,/, '+');
+        if (this.state.calc === value) return;
         
         this.setState({
-            [name]: value,
+            calc: value,
         })
         
         window.clearTimeout(this.timer);
@@ -91,16 +88,6 @@ export class ItemRow extends React.Component<Props, State> {
         
         return (
             <tr>
-            {/* <td>
-                <input
-                    type='text'
-                    name='name'
-                    className='input is-small'
-                    onChange={this.onInput}
-                    value={this.state.name}
-                    placeholder='Job 1...'
-                />
-            </td> */}
             <td>
                 <span
                     onClick={this.onInsert}
