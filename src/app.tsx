@@ -17,6 +17,10 @@ export class App extends React.Component<Props> {
         this.props.dispatch({ type: 'ITEM_NEW' });
     }
     
+    onClear = () => {
+        this.props.dispatch({ type: 'ITEM_CLEAR' });
+    }
+    
     render() {
         const {items, rate, minutes} = this.props;
         const amount = (minutes / 60 * rate).toFixed(2);
@@ -43,6 +47,11 @@ export class App extends React.Component<Props> {
                     type='button'
                     onClick={this.onAdd}>
                     Add
+                </button>
+                <button
+                    type='button'
+                    onClick={this.onClear}>
+                    Clear
                 </button>
             </div>
         )

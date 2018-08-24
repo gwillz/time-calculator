@@ -24,6 +24,8 @@ type Action = {
 } | {
     type: 'ITEM_REMOVE';
     index: number;
+} | {
+    type: 'ITEM_CLEAR';
 }
 
 const init_state: State = {
@@ -62,6 +64,13 @@ function reducer(state = init_state, action: Action): State {
             return {
                 ...state,
                 items,
+            }
+        
+        case 'ITEM_CLEAR':
+            return {
+                ...state,
+                items: [],
+                minutes: 0,
             }
     }
     return state;
