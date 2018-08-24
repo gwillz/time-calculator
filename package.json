@@ -1,7 +1,8 @@
 {
-  "name": "time-react",
+  "name": "time-sheets",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "description": "Quick and easy timesheets",
   "main": "dist/app.js",
   "scripts": {
     "webpack": "webpack --progress",
