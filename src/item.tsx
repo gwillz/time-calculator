@@ -65,29 +65,43 @@ export class ItemRow extends React.Component<Props, State> {
         const amount = (minutes / 60 * rate).toFixed(2);
         
         return (
-            <div>
+            <tr>
+            {/* <td>
                 <input
                     type='text'
                     name='name'
+                    className='input is-small'
                     onChange={this.onInput}
                     value={this.state.name}
+                    placeholder='Job 1...'
                 />
+            </td> */}
+            <td>
                 <input
                     type='text'
                     name='calc'
+                    className='input is-small'
                     onChange={this.onInput}
                     value={this.state.calc}
+                    placeholder='1:00 + 2:30'
+                    autoComplete='off'
+                    autoCorrect='off'
                 />
-                <span>
-                    {hours} hrs
+            </td>
+            <td>
+                {hours}
+            </td>
+            <td>
+                ${amount}
+            </td>
+            <td>
+                <span
+                    onClick={this.onDelete}
+                    className='icon is-small'>
+                    <i className='fas fa-trash-alt'/>
                 </span>
-                <span>
-                    ${amount}
-                </span>
-                <button onClick={this.onDelete}>
-                    X
-                </button>
-            </div>
+            </td>
+            </tr>
         )
     }
 }

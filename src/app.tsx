@@ -28,9 +28,20 @@ export class App extends React.Component<Props> {
         const hours = formatHours(minutes);
         
         return (
-            <div>
-                <div>
-                    {Object.values(items).map((item, i) => (
+            <>
+            <div className="hero is-small is-bold is-primary">
+            <div className="hero-body">
+            <div className="container is-squished">
+                <h1 className="title">
+                    Time Calculator
+                </h1>
+            </div>
+            </div>
+            </div>
+            <div className="section container is-squished">
+                <table className="table is-fullwidth">
+                <tbody>
+                    {items.map((item, i) => (
                         <ItemRow
                             dispatch={this.props.dispatch}
                             key={i} index={i}
@@ -40,24 +51,55 @@ export class App extends React.Component<Props> {
                             rate={rate}
                         />
                     ))}
-                </div>
-                <div>
-                    Total ${amount} &nbsp; {hours} hrs
-                </div>
-                <div>
-                    <button
-                        type='button'
-                        onClick={this.onAdd}>
-                        Add
-                    </button>
-                    <button
-                        type='button'
-                        onClick={this.onClear}>
-                        Clear
-                    </button>
-                    <RateInput/>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        {/* <td/> */}
+                        <td/>
+                        <td>{hours}</td>
+                        <td>${amount}</td>
+                        <td/>
+                    </tr>
+                </tfoot>
+                </table>
+                <div className='field is-grouped'>
+                    <span className='control'>
+                        <button
+                            type='button'
+                            className='button'
+                            title='New Entry'
+                            onClick={this.onAdd}>
+                            <span className='icon is-small'>
+                                <i className='fas fa-plus-circle'/>
+                            </span>
+                            <span>
+                                Add
+                            </span>
+                        </button>
+                    </span>
+                    <span className='control'>
+                        <button
+                            type='button'
+                            className='button'
+                            title='Clear All'
+                            onClick={this.onClear}>
+                            <span className='icon is-small'>
+                                <i className='fas fa-eraser'/>
+                            </span>
+                            <span>
+                                Clear
+                            </span>
+                        </button>
+                    </span>
+                    <span className='control is-expanded has-icons-left'>
+                        <RateInput/>
+                        <span className='icon is-small is-left'>
+                            <i className='fas fa-dollar-sign'/>
+                        </span>
+                    </span>
                 </div>
             </div>
+            </>
         )
     }
 }

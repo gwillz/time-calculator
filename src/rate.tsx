@@ -41,11 +41,14 @@ export class RateInput extends React.Component<Props, State> {
     render() {
         return (
             <input
-                type="number"
-                step="0.01"
+                type='number'
+                className='input'
+                step='0.01'
                 value={this.state.value}
                 onChange={this.onInput}
                 placeholder='0.00'
+                autoComplete='off'
+                autoCorrect='off'
             />
         )
     }
