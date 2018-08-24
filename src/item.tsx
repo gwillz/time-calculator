@@ -1,56 +1,69 @@
 
 import * as React from 'react'
-
-const RATE = 26.0;
-
+import {connect, DispatchProp} from 'react-redux'
 import {calculate, formatHours} from './core'
 
-export type Props = {
+type Props = DispatchProp & {
     name?: string;
-    value?: string;
+    calc?: string;
     index: number;
+    rate: number;
+    minutes: number;
 }
 
 type State = {
-    [key: string]: string;
+    [name: string]: string;
 }
 
-export class Item extends React.Component<Props, State> {
-    state = {
-        name: '',
-        hours: '',
-        total_hours: '0:00',
-        total_money: '0.00',
-    }
+export class ItemRow extends React.Component<Props, State> {
     
-    static getDerivedStateFromProps(props: Props, state: State) {
-        for (let key in props) {
-            state[key] = props[key];
+    private timer: number;
+    
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            name: props.name || '',
+            calc: props.calc || '',
         }
-        return state;
     }
     
     onInput = (event: React.SyntheticEvent<HTMLInputElement>) => {
         const {name, value} = event.currentTarget;
         
+        if (this.state[name] === value) return;
+        
         this.setState({
             [name]: value,
         })
         
-        if (name === 'hours') {
-            const minutes = calculate(value);
-            this.setState({
-                total_hours: formatHours(minutes),
-                total_money: (minutes / 60 * RATE).toFixed(2),
+        window.clearTimeout(this.timer);
+        this.timer = window.setTimeout(() => {
+            const minutes = (name === 'calc')
+            ? calculate(value) : this.props.minutes;
+            
+            this.props.dispatch({
+                type: "ITEM_EDIT",
+                index: this.props.index,
+                item: {
+                    [name]: value,
+                    minutes,
+                }
             })
-        }
+        }, 300)
     }
     
     onDelete = () => {
-        console.log('delete', this.props.index);
+        this.props.dispatch({
+            type: 'ITEM_REMOVE',
+            index: this.props.index,
+        })
     }
     
     render() {
+        const {minutes, rate} = this.props;
+        const hours = formatHours(minutes);
+        const amount = (minutes / 60 * rate).toFixed(2);
+        
         return (
             <div>
                 <input
@@ -61,15 +74,15 @@ export class Item extends React.Component<Props, State> {
                 />
                 <input
                     type='text'
-                    name='hours'
+                    name='calc'
                     onChange={this.onInput}
-                    value={this.state.hours}
+                    value={this.state.calc}
                 />
                 <span>
-                    {this.state.total_hours} hrs
+                    {hours} hrs
                 </span>
                 <span>
-                    $ {this.state.total_money}
+                    ${amount}
                 </span>
                 <button onClick={this.onDelete}>
                     X
@@ -78,3 +91,5 @@ export class Item extends React.Component<Props, State> {
         )
     }
 }
+
+export default connect()(ItemRow);
