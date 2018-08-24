@@ -11,6 +11,10 @@ html, body, #root {
     padding: 0;
 }
 
+.is-squished {
+    max-width: 720px;
+}
+
 .loading {
     display: flex;
     align-items: center;
@@ -20,24 +24,28 @@ html, body, #root {
 
 .inline-button {
     cursor: pointer;
+    
+    &.disabled {
+        cursor: not-allowed;
+        color: #bbb;
+    }
 }
 
-.inline-button.disabled {
-    cursor: not-allowed;
-    color: #bbb;
+.table {
+    & td {
+        vertical-align: middle !important;
+        padding: 0.5em 0.25em;
+        
+        &:first-child,
+        &:last-child {
+            width: 1.5em;
+        }
+    }
+    & input {
+        width: 100%;
+    }
 }
 
-.is-squished {
-    max-width: 720px;
-}
-
-table td {
-    vertical-align: middle !important;
-}
-
-table input {
-    width: 100%;
-}
 
 @media all and (max-width: 720px) {
     .section {
