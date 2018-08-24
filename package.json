@@ -7,10 +7,11 @@
   "scripts": {
     "webpack": "webpack --progress",
     "postcss": "postcss src/index.css -o public/index.css --verbose",
+    "assets": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public",
     "build": "tsc",
-    "dev": "nodemon --exec 'ts-node --files --cache-directory .tscache ./app.ts'",
+    "dev": "ts-node --files ./app.ts",
     "watch": "bash watch.sh",
-    "start": "ts-node --files ./app.ts"
+    "start": "node dist/app.js"
   },
   "author": "",
   "license": "ISC",
