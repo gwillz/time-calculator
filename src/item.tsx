@@ -28,9 +28,11 @@ export class ItemRow extends React.Component<Props, State> {
     }
     
     onInput = (event: React.SyntheticEvent<HTMLInputElement>) => {
-        const {name, value} = event.currentTarget;
+        let {name, value} = event.currentTarget;
         
         if (this.state[name] === value) return;
+        
+        value = value.replace(/\./, ':').replace(/,/, '+');
         
         this.setState({
             [name]: value,
@@ -84,6 +86,7 @@ export class ItemRow extends React.Component<Props, State> {
                     onChange={this.onInput}
                     value={this.state.calc}
                     placeholder='1:00 + 2:30'
+                    inputMode='numeric'
                     autoComplete='off'
                     autoCorrect='off'
                 />
