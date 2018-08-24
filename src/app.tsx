@@ -3,7 +3,7 @@ import * as React from 'react'
 import {connect, DispatchProp} from 'react-redux'
 import {Item, State} from './store'
 import {ItemRow} from './item'
-import RateInput from './rate'
+import {AppControls} from './controls'
 import {formatHours} from './core'
 
 type Props = DispatchProp & {
@@ -12,16 +12,22 @@ type Props = DispatchProp & {
     minutes: number;
 }
 
+
+function Header() {
+    return (
+        <div className="hero is-small is-bold is-primary">
+        <div className="hero-body">
+        <div className="container is-squished">
+            <h1 className="title">
+                Time Calculator
+            </h1>
+        </div>
+        </div>
+        </div>
+    )
+}
+
 export class App extends React.Component<Props> {
-    
-    onAdd = () => {
-        this.props.dispatch({ type: 'ITEM_NEW' });
-    }
-    
-    onClear = () => {
-        this.props.dispatch({ type: 'ITEM_CLEAR' });
-    }
-    
     render() {
         const {items, rate, minutes} = this.props;
         const amount = (minutes / 60 * rate).toFixed(2);
@@ -29,15 +35,7 @@ export class App extends React.Component<Props> {
         
         return (
             <>
-            <div className="hero is-small is-bold is-primary">
-            <div className="hero-body">
-            <div className="container is-squished">
-                <h1 className="title">
-                    Time Calculator
-                </h1>
-            </div>
-            </div>
-            </div>
+            <Header/>
             <div className="section container is-squished">
                 <table className="table is-fullwidth">
                 <tbody>
@@ -62,42 +60,10 @@ export class App extends React.Component<Props> {
                     </tr>
                 </tfoot>
                 </table>
-                <div className='field is-grouped'>
-                    <span className='control'>
-                        <button
-                            type='button'
-                            className='button'
-                            title='New Entry'
-                            onClick={this.onAdd}>
-                            <span className='icon is-small'>
-                                <i className='fas fa-plus-circle'/>
-                            </span>
-                            <span>
-                                Add
-                            </span>
-                        </button>
-                    </span>
-                    <span className='control'>
-                        <button
-                            type='button'
-                            className='button'
-                            title='Clear All'
-                            onClick={this.onClear}>
-                            <span className='icon is-small'>
-                                <i className='fas fa-eraser'/>
-                            </span>
-                            <span>
-                                Clear
-                            </span>
-                        </button>
-                    </span>
-                    <span className='control is-expanded has-icons-left'>
-                        <RateInput/>
-                        <span className='icon is-small is-left'>
-                            <i className='fas fa-dollar-sign'/>
-                        </span>
-                    </span>
-                </div>
+                <AppControls
+                    dispatch={this.props.dispatch}
+                    rate={rate}
+                />
             </div>
             </>
         )
@@ -106,7 +72,7 @@ export class App extends React.Component<Props> {
 
 export function Loader() {
     return (
-        <div>
+        <div className='loading'>
             Loading...
         </div>
     )

@@ -2,6 +2,7 @@
 import {createStore} from 'redux'
 import {persistReducer, persistStore} from 'redux-persist'
 import local from 'redux-persist/lib/storage'
+import {formatHours} from './core'
 
 export interface Item {
     name: string;
@@ -17,6 +18,7 @@ export type State = {
 
 type Action = {
     type: 'ITEM_NEW';
+    minutes?: number;
 } | {
     type: 'ITEM_EDIT';
     index: number;
@@ -29,6 +31,11 @@ type Action = {
 } | {
     type: 'RATE_EDIT';
     rate: number;
+} | {
+    type: 'DATE_EDIT';
+    date: {
+        [name: string]: Date;
+    }
 }
 
 const init_state: State = {
@@ -45,8 +52,8 @@ function reducer(state = init_state, action: Action): State {
                 ...state,
                 items: (items.push({
                     name: '',
-                    calc: '',
-                    minutes: 0,
+                    calc: action.minutes ? formatHours(action.minutes) : '',
+                    minutes: action.minutes || 0,
                 }), items)
             }
         
