@@ -25,6 +25,10 @@ html, body, #root {
 .hero.is-lou {
     background-color: #f8c206;
     
+    & .hero-body {
+        padding: 1.5em 0.75em;
+    }
+    
     & .title {
         color: rgba(255,255,255,0.7);
         font-weight: 300;

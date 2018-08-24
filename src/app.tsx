@@ -16,7 +16,7 @@ type Props = DispatchProp & {
 
 function Header() {
     return (
-        <div className="hero is-small is-lou">
+        <div className="hero is-lou">
         <div className="hero-body">
         <div className="container is-squished">
             <h1 className="title">
