@@ -1,10 +1,8 @@
 
 import * as React from 'react'
-import * as moment from 'moment'
 import {connect, DispatchProp} from 'react-redux'
 import RateInput from './rate'
 import {State as Store} from './store'
-import {formatHours} from './core'
 
 
 type Props = DispatchProp & {
@@ -73,13 +71,8 @@ export class AppControls extends React.Component<Props, State> {
     onAdd = () => {
         this.props.dispatch({
             type: 'ITEM_NEW',
+            minutes: this.getTime(),
         });
-        
-        this.setState(state => ({
-            beginning: state.ending,
-            ending: '',
-        }))
-        
     }
     
     onClear = () => {
@@ -152,12 +145,6 @@ export class AppControls extends React.Component<Props, State> {
             </>
         )
     }
-}
-
-function fromDate(date: Date) {
-    let hours   = date.getHours(),
-        minutes = date.getMinutes();
-    return `${hours}:${minutes}`;
 }
 
 export default connect((state: Store) => ({

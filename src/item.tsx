@@ -4,7 +4,7 @@ import {connect, DispatchProp} from 'react-redux'
 import {calculate, formatHours} from './core'
 
 type Props = DispatchProp & {
-    calc?: string;
+    value?: string;
     index: number;
     rate: number;
     minutes: number;
@@ -12,7 +12,7 @@ type Props = DispatchProp & {
 }
 
 type State = {
-    calc: string;
+    value: string;
 }
 
 export class ItemRow extends React.Component<Props, State> {
@@ -22,29 +22,26 @@ export class ItemRow extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            calc: props.calc || '',
+            value: props.value || '',
         }
     }
     
     onInput = (event: React.SyntheticEvent<HTMLInputElement>) => {
         let {value} = event.currentTarget;
         value = value.replace(/\./, ':').replace(/,/, '+');
-        if (this.state.calc === value) return;
+        if (this.state.value === value) return;
         
-        this.setState({
-            calc: value,
-        })
+        this.setState({ value });
         
         window.clearTimeout(this.timer);
         this.timer = window.setTimeout(() => {
-            const minutes = (name === 'calc')
-            ? calculate(value) : this.props.minutes;
+            const minutes = calculate(value);
             
             this.props.dispatch({
                 type: "ITEM_EDIT",
                 index: this.props.index,
                 item: {
-                    [name]: value,
+                    value,
                     minutes,
                 }
             })
@@ -63,15 +60,15 @@ export class ItemRow extends React.Component<Props, State> {
         const hours = formatHours(this.props.insert);
         
         this.setState(state => ({
-            calc: state.calc + " + " + hours,
+            value: state.value + " + " + hours,
         }),
         () => {
             this.props.dispatch({
                 type: 'ITEM_EDIT',
                 index: this.props.index,
                 item: {
-                    calc: this.state.calc,
-                    minutes: calculate(this.state.calc),
+                    value: this.state.value,
+                    minutes: calculate(this.state.value),
                 }
             })
             this.props.dispatch({ type: 'INSERT_DONE' });
@@ -97,10 +94,9 @@ export class ItemRow extends React.Component<Props, State> {
             <td>
                 <input
                     type='text'
-                    name='calc'
                     className='input is-small'
                     onChange={this.onInput}
-                    value={this.state.calc}
+                    value={this.state.value}
                     placeholder='1:00 + 2:30'
                     inputMode='numeric'
                     autoComplete='off'

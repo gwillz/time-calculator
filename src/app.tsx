@@ -44,7 +44,7 @@ export class App extends React.Component<Props> {
                         <ItemRow
                             dispatch={this.props.dispatch}
                             key={i} index={i}
-                            calc={item.calc}
+                            value={item.value}
                             minutes={item.minutes}
                             rate={rate}
                             insert={this.props.insert}
