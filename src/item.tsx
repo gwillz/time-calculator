@@ -100,7 +100,7 @@ export class ItemRow extends React.Component<Props, State> {
             <td>
                 <span
                     onClick={this.onDelete}
-                    className='icon is-small'>
+                    className='inline-button icon is-small'>
                     <i className='fas fa-trash-alt'/>
                 </span>
             </td>

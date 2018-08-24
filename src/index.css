@@ -11,6 +11,17 @@ html, body, #root {
     padding: 0;
 }
 
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.inline-button {
+    cursor: pointer;
+}
+
 .is-squished {
     max-width: 720px;
 }

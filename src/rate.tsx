@@ -43,7 +43,7 @@ export class RateInput extends React.Component<Props, State> {
             <input
                 type='number'
                 className='input'
-                step='0.01'
+                step='0.10'
                 value={this.state.value}
                 onChange={this.onInput}
                 placeholder='0.00'
