@@ -3,6 +3,7 @@ import * as React from 'react'
 import {connect, DispatchProp} from 'react-redux'
 import {Item, State} from './store'
 import {ItemRow} from './item'
+import RateInput from './rate'
 import {formatHours} from './core'
 
 type Props = DispatchProp & {
@@ -41,18 +42,21 @@ export class App extends React.Component<Props> {
                     ))}
                 </div>
                 <div>
-                    Rate: {rate} &nbsp; Total ${amount} &nbsp; {hours} hrs
+                    Total ${amount} &nbsp; {hours} hrs
                 </div>
-                <button
-                    type='button'
-                    onClick={this.onAdd}>
-                    Add
-                </button>
-                <button
-                    type='button'
-                    onClick={this.onClear}>
-                    Clear
-                </button>
+                <div>
+                    <button
+                        type='button'
+                        onClick={this.onAdd}>
+                        Add
+                    </button>
+                    <button
+                        type='button'
+                        onClick={this.onClear}>
+                        Clear
+                    </button>
+                    <RateInput/>
+                </div>
             </div>
         )
     }

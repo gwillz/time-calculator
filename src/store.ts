@@ -26,6 +26,9 @@ type Action = {
     index: number;
 } | {
     type: 'ITEM_CLEAR';
+} | {
+    type: 'RATE_EDIT';
+    rate: number;
 }
 
 const init_state: State = {
@@ -71,6 +74,12 @@ function reducer(state = init_state, action: Action): State {
                 ...state,
                 items: [],
                 minutes: 0,
+            }
+        
+        case 'RATE_EDIT':
+            return {
+                ...state,
+                rate: action.rate,
             }
     }
     return state;
