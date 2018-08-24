@@ -10,6 +10,7 @@ type Props = DispatchProp & {
     items: Item[];
     rate: number;
     minutes: number;
+    insert: number | undefined;
 }
 
 
@@ -47,12 +48,13 @@ export class App extends React.Component<Props> {
                             calc={item.calc}
                             minutes={item.minutes}
                             rate={rate}
+                            insert={this.props.insert}
                         />
                     ))}
                 </tbody>
                 <tfoot>
                     <tr>
-                        {/* <td/> */}
+                        <td/>
                         <td/>
                         <td>{hours}</td>
                         <td>${amount}</td>
@@ -63,6 +65,7 @@ export class App extends React.Component<Props> {
                 <AppControls
                     dispatch={this.props.dispatch}
                     rate={rate}
+                    insert={this.props.insert}
                 />
             </div>
             </>
@@ -82,4 +85,5 @@ export default connect((state: State) => ({
     items: state.items,
     rate: state.rate,
     minutes: state.minutes,
+    insert: state.insert,
 }))(App);

@@ -22,6 +22,11 @@ html, body, #root {
     cursor: pointer;
 }
 
+.inline-button.disabled {
+    cursor: not-allowed;
+    color: #bbb;
+}
+
 .is-squished {
     max-width: 720px;
 }

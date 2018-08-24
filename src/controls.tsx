@@ -9,7 +9,7 @@ import {formatHours} from './core'
 
 type Props = DispatchProp & {
     rate: number;
-    lastDate?: Date;
+    insert: number | undefined;
 }
 
 type State = {
@@ -26,6 +26,15 @@ export class AppControls extends React.Component<Props, State> {
         this.state = {
             beginning: '',
             ending: '',
+        }
+    }
+    
+    componentDidUpdate(props: Props) {
+        if (!this.props.insert && !!props.insert) {
+            this.setState(state => ({
+                beginning: state.ending,
+                ending: '',
+            }))
         }
     }
     
@@ -48,13 +57,22 @@ export class AppControls extends React.Component<Props, State> {
         
         this.setState({
             [name]: value
+        },
+        () => {
+            const insert = this.getTime();
+            if (insert) {
+                this.props.dispatch({
+                    type: 'INSERT_READY',
+                    insert,
+                })
+            }
         })
+        
     }
     
     onAdd = () => {
         this.props.dispatch({
             type: 'ITEM_NEW',
-            minutes: this.getTime(),
         });
         
         this.setState(state => ({
@@ -143,5 +161,6 @@ function fromDate(date: Date) {
 }
 
 export default connect((state: Store) => ({
-    rate: state.rate
+    rate: state.rate,
+    insert: state.insert,
 }))(AppControls);

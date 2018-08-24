@@ -14,6 +14,7 @@ export type State = {
     items: Item[];
     minutes: number;
     rate: number;
+    insert?: number;
 }
 
 type Action = {
@@ -32,10 +33,10 @@ type Action = {
     type: 'RATE_EDIT';
     rate: number;
 } | {
-    type: 'DATE_EDIT';
-    date: {
-        [name: string]: Date;
-    }
+    type: 'INSERT_READY';
+    insert: number;
+} | {
+    type: 'INSERT_DONE';
 }
 
 const init_state: State = {
@@ -55,7 +56,7 @@ function reducer(state = init_state, action: Action): State {
                     calc: action.minutes ? formatHours(action.minutes) : '',
                     minutes: action.minutes || 0,
                 }), items),
-                minutes: items.reduce((sum, item) => sum + item.minutes, 0),
+                minutes: sum(items),
             }
         
         case 'ITEM_EDIT':
@@ -65,7 +66,7 @@ function reducer(state = init_state, action: Action): State {
                     ...items[action.index],
                     ...action.item,
                 }, items),
-                minutes: items.reduce((sum, item) => sum + item.minutes, 0),
+                minutes: sum(items),
             }
         
         case 'ITEM_REMOVE':
@@ -73,7 +74,7 @@ function reducer(state = init_state, action: Action): State {
             return {
                 ...state,
                 items,
-                minutes: items.reduce((sum, item) => sum + item.minutes, 0),
+                minutes: sum(items),
             }
         
         case 'ITEM_CLEAR':
@@ -88,8 +89,24 @@ function reducer(state = init_state, action: Action): State {
                 ...state,
                 rate: action.rate,
             }
+        
+        case 'INSERT_READY':
+            return {
+                ...state,
+                insert: action.insert,
+            }
+        
+        case 'INSERT_DONE':
+            return {
+                ...state,
+                insert: undefined,
+            }
     }
     return state;
+}
+
+function sum(items: Item[]) {
+    return items.reduce((sum, item) => sum + item.minutes, 0);
 }
 
 const persist = {
