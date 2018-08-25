@@ -1,6 +1,6 @@
 
 @import "@fortawesome/fontawesome-free";
-@import "./fa-solid-webfont.css";
+@import "./fa-webfont.css";
 @import "bulma/css/bulma.css";
 
 html, body, #root {
@@ -44,6 +44,10 @@ html, body, #root {
         cursor: not-allowed;
         color: #bbb;
     }
+}
+
+a.icon {
+    color: #333;
 }
 
 .table {

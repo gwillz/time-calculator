@@ -28,6 +28,28 @@ function Header() {
     )
 }
 
+function Footer() {
+    return (
+        <div className="footer">
+        <div className="container">
+        <div className="content has-text-centered">
+            <p>
+                Time Calculator.
+                &nbsp;&nbsp;
+                <a className='icon' href="//gwillz.com">
+                    <i className='fas fa-user-circle'/>
+                </a>
+                &nbsp;&nbsp;
+                <a className='icon' href="//github.com/gwillz/time-calculator">
+                    <i className='fab fa-github'/>
+                </a>
+            </p>
+        </div>
+        </div>
+        </div>
+    )
+}
+
 export function Loader() {
     return (
         <div className='loading'>
@@ -75,6 +97,7 @@ export class App extends React.Component<Props> {
                     insert={this.props.insert}
                 />
             </div>
+            <Footer/>
             </>
         )
     }
