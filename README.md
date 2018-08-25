@@ -1,5 +1,5 @@
 
-# Time Sheets
+# Time Calculator
 
 *For Lou.*
 
