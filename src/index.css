@@ -10,6 +10,18 @@ html, body, #root {
     margin: 0;
     padding: 0;
 }
+html {
+    min-height: 100%;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    
+    & .section {
+        flex: 1 1 auto;
+    }
+}
 
 .is-squished {
     max-width: 720px;
@@ -46,8 +58,13 @@ html, body, #root {
     }
 }
 
-a.icon {
-    color: #333;
+
+.footer {
+    padding: 2rem 0 4rem;
+    
+    &, & a.icon {
+        color: #777;
+    }
 }
 
 .table {
