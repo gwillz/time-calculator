@@ -20,6 +20,7 @@ export function calculate(value: string): number {
 }
 
 export function formatHours(minutes: number) {
-    return Math.floor(Math.abs(minutes / 60)) + ":" +
+    return (minutes > -1 ? '' : '-') +
+        (Math.floor(Math.abs(minutes / 60)) + ":") +
         (Math.abs(minutes % 60) + '').padStart(2, '0');
 }
