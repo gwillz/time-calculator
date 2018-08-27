@@ -44,6 +44,8 @@ export class AppControls extends React.Component<Props, State> {
         let end   = this.ending.valueAsDate as Date;
         let minutes = (end.getTime() - start.getTime()) / 60000;
         
+        if (minutes < 0) minutes += 24 * 60;
+        
         return Math.round(minutes);
     }
     
