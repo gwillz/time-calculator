@@ -46,7 +46,7 @@ const init_state: State = {
     version: 0,
 }
 
-export function reducer(state = init_state, action: Action): State {
+function reducer(state = init_state, action: Action): State {
     let items = state.items.slice(0);
     switch (action.type) {
         case 'ITEM_NEW':

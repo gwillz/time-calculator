@@ -1,6 +1,6 @@
 
 import * as test from 'tape'
-import {reducer, sum, Action} from '../src/appstate'
+import reducer, {sum, Action} from '../src/appstate'
 
 test('sum() of items', assert => {
     const items = [

@@ -4,6 +4,8 @@ import {persistReducer, persistStore} from 'redux-persist'
 import local from 'redux-persist/lib/storage'
 import appReducer from './appstate'
 
+export * from './appstate'
+
 const persist = {
     key: 'loutime',
     storage: local,
