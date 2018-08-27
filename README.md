@@ -22,6 +22,7 @@ npm run assets
 
 ```sh
 npm install
+npm run test
 npm run assets
 npm run watch
 ```
