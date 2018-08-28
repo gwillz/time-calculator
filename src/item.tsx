@@ -13,6 +13,7 @@ type Props = DispatchProp & {
 
 type State = {
     value: string;
+    clear_ready: boolean;
 }
 
 export class ItemRow extends React.Component<Props, State> {
@@ -23,6 +24,7 @@ export class ItemRow extends React.Component<Props, State> {
         super(props);
         this.state = {
             value: props.value || '',
+            clear_ready: false,
         }
     }
     
@@ -49,10 +51,23 @@ export class ItemRow extends React.Component<Props, State> {
     }
     
     onDelete = () => {
-        this.props.dispatch({
-            type: 'ITEM_REMOVE',
-            index: this.props.index,
-        })
+        if (this.state.clear_ready) {
+            this.props.dispatch({
+                type: 'ITEM_REMOVE',
+                index: this.props.index,
+            })
+        }
+        this.setState(state => ({
+            clear_ready: !state.clear_ready,
+        }))
+    }
+    
+    onCancel = () => {
+        if (this.state.clear_ready) {
+            this.setState({
+                clear_ready: false,
+            })
+        }
     }
     
     onInsert = () => {
@@ -109,11 +124,13 @@ export class ItemRow extends React.Component<Props, State> {
             <td>
                 ${amount}
             </td>
-            <td>
+            <td className={(this.state.clear_ready ? 'control-focus' : '')}
+                onClick={this.onCancel}>
                 <span
                     onClick={this.onDelete}
                     className='inline-button icon is-small'>
-                    <i className='fas fa-trash-alt'/>
+                    <i className={'fas ' + (this.state.clear_ready
+                            ? 'fa-check-circle' : 'fa-trash-alt')}/>
                 </span>
             </td>
             </tr>

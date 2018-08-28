@@ -94,6 +94,14 @@ html {
     }
     & * {
         z-index: 110;
+        position: relative;
+    }
+    & .inline-button {
+        background: #fff;
+        border: 5px solid #fff;
+        border-radius: 50%;
+        box-sizing: content-box;
+        margin: -5px;
     }
 }
 
