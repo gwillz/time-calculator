@@ -160,7 +160,9 @@ export class AppControls extends React.Component<Props, State> {
                         </span>
                     </button>
                 </span>
-                <span className='control is-expanded has-icons-left'>
+                <span className='control is-expanded'>
+                </span>
+                <span className='control is-not-expanded has-icons-left'>
                     <RateInput/>
                     <span className='icon is-small is-left'>
                         <i className='fas fa-dollar-sign'/>
