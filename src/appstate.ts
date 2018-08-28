@@ -11,7 +11,7 @@ export type State = {
     minutes: number;
     rate: number;
     insert?: number;
-    version: number;
+    version: string;
 }
 
 export type Action = {
@@ -43,7 +43,7 @@ const init_state: State = {
     }],
     minutes: 0,
     rate: 26,
-    version: 0,
+    version: 'a',
 }
 
 function reducer(state = init_state, action: Action): State {
@@ -91,7 +91,7 @@ function reducer(state = init_state, action: Action): State {
             return {
                 ...init_state,
                 rate: state.rate,
-                version: state.version + 1,
+                version: nextVersion(state.version),
             }
         
         case 'RATE_EDIT':
@@ -117,6 +117,10 @@ function reducer(state = init_state, action: Action): State {
 
 export function sum(items: Item[]) {
     return items.reduce((sum, item) => sum + item.minutes, 0);
+}
+
+export function nextVersion(version: string) {
+    return (parseInt(version, 36) + 1).toString(36);
 }
 
 export default reducer;

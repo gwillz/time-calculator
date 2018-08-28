@@ -11,7 +11,7 @@ type Props = DispatchProp & {
     rate: number;
     minutes: number;
     insert: number | undefined;
-    version: number;
+    version: string;
 }
 
 function Header() {

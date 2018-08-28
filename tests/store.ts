@@ -1,6 +1,6 @@
 
 import * as test from 'tape'
-import reducer, {sum, Action} from '../src/appstate'
+import reducer, {sum, nextVersion, Action} from '../src/appstate'
 
 test('sum() of items', assert => {
     const items = [
@@ -20,6 +20,14 @@ test('sum() of items', assert => {
     
     const actual = sum(items);
     const expected = 233;
+    
+    assert.equal(actual, expected);
+    assert.end();
+})
+
+test('nextVersion()', assert => {
+    const actual = nextVersion('abc');
+    const expected = 'abd';
     
     assert.equal(actual, expected);
     assert.end();
@@ -92,7 +100,7 @@ test('ITEM_CLEAR', assert => {
         minutes: 0,
     });
     assert.equal(state.minutes, 0);
-    assert.equal(state.version, 1);
+    assert.equal(state.version, 'b');
     assert.end();
 })
 
