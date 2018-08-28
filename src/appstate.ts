@@ -84,6 +84,8 @@ function reducer(state = init_state, action: Action): State {
             return {
                 ...state,
                 items,
+                version: state.minutes > 0
+                    ? nextVersion(state.version) : state.version,
                 minutes: sum(items),
             }
         
