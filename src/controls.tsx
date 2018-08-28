@@ -13,6 +13,7 @@ type Props = DispatchProp & {
 type State = {
     beginning: string;
     ending: string;
+    clear_ready: boolean;
 }
 
 export class AppControls extends React.Component<Props, State> {
@@ -25,6 +26,7 @@ export class AppControls extends React.Component<Props, State> {
         this.state = {
             beginning: '',
             ending: '',
+            clear_ready: false,
         }
     }
     
@@ -80,7 +82,20 @@ export class AppControls extends React.Component<Props, State> {
     }
     
     onClear = () => {
-        this.props.dispatch({ type: 'ITEM_CLEAR' });
+        if (this.state.clear_ready) {
+            this.props.dispatch({ type: 'ITEM_CLEAR' });
+        }
+        this.setState(state => ({
+            clear_ready: !state.clear_ready,
+        }))
+    }
+    
+    onCancel = () => {
+        if (this.state.clear_ready) {
+            this.setState({
+                clear_ready: false,
+            })
+        }
     }
     
     render() {
@@ -125,7 +140,10 @@ export class AppControls extends React.Component<Props, State> {
                         </span>
                     </button>
                 </span>
-                <span className='control'>
+                <span
+                    className={'control' +
+                        (this.state.clear_ready ? ' control-focus' : '')}
+                    onClick={this.onCancel}>
                     <button
                         type='button'
                         className='button'
@@ -135,7 +153,7 @@ export class AppControls extends React.Component<Props, State> {
                             <i className='fas fa-eraser'/>
                         </span>
                         <span>
-                            Clear
+                            {this.state.clear_ready ? 'Confirm' : 'Clear'}
                         </span>
                     </button>
                 </span>

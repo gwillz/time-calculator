@@ -58,7 +58,6 @@ html {
     }
 }
 
-
 .footer {
     padding: 2rem 0 4rem;
     
@@ -79,6 +78,22 @@ html {
     }
     & input {
         width: 100%;
+    }
+}
+
+.control-focus {
+    &::before {
+        content: '';
+        position: fixed;
+        background: rgba(0,0,0,0.7);
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+    }
+    & * {
+        z-index: 110;
     }
 }
 
