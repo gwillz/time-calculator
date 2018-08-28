@@ -1,5 +1,6 @@
+const fs = require('fs')
+const path = require('path')
 const webpack = require('webpack')
-const path    = require('path')
 const BundleAnalyzerPlugin  = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
@@ -58,8 +59,10 @@ if (isProduction) {
         }),
         new OfflinePlugin({
             externals: [
-                '/index.css'
-            ]
+                '/index.css',
+            ].concat(
+                fs.readdirSync(ROOT + '/public/webfonts').map(f => ('/webfonts/' + f)),
+            )
         }),
     ])
 }
