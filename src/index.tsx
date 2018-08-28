@@ -4,6 +4,9 @@ import {Provider} from 'react-redux'
 import {PersistGate} from 'redux-persist/integration/react'
 import store, {persistor} from './store'
 import App, {Loader} from './app'
+import * as OfflinePluginRuntime from 'offline-plugin/runtime'
+
+OfflinePluginRuntime.install();
 
 ReactDOM.render((
     <PersistGate loading={Loader()} persistor={persistor}>

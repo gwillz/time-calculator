@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const path    = require('path')
 const BundleAnalyzerPlugin  = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const OfflinePlugin = require('offline-plugin')
 
 const presetMode = process.env.NODE_ENV || 'development';
 const isProduction = (presetMode === 'production');
@@ -42,10 +43,9 @@ module.exports = {
         ],
     },
     plugins: [
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new HtmlWebpackPlugin({
             template: ROOT + '/src/index.html',
-        })
+        }),
     ],
 }
 
@@ -55,6 +55,11 @@ if (isProduction) {
             analyzerMode: 'static',
             openAnalyzer: false,
             reportFilename: ROOT + '/report.html',
+        }),
+        new OfflinePlugin({
+            externals: [
+                '/index.css'
+            ]
         }),
     ])
 }
