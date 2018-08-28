@@ -33,7 +33,7 @@ export class RateInput extends React.Component<Props, State> {
         this.timer = window.setTimeout(() => {
             this.props.dispatch({
                 type: 'RATE_EDIT',
-                rate: parseInt(value || '0', 10),
+                rate: parseFloat(value || '0'),
             })
         }, 300);
     }
