@@ -95,6 +95,7 @@ export class App extends React.Component<Props> {
                     dispatch={this.props.dispatch}
                     rate={rate}
                     insert={this.props.insert}
+                    minutes={this.props.minutes}
                 />
             </div>
             <Footer/>

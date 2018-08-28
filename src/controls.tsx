@@ -8,6 +8,7 @@ import {State as Store} from './store'
 type Props = DispatchProp & {
     rate: number;
     insert: number | undefined;
+    minutes: number;
 }
 
 type State = {
@@ -81,20 +82,22 @@ export class AppControls extends React.Component<Props, State> {
         });
     }
     
-    onClear = () => {
-        if (this.state.clear_ready) {
+    onClear = (event: React.SyntheticEvent) => {
+        event.stopPropagation();
+        
+        if (this.state.clear_ready || this.props.minutes == 0) {
             this.props.dispatch({ type: 'ITEM_CLEAR' });
         }
-        this.setState(state => ({
-            clear_ready: !state.clear_ready,
-        }))
+        if (this.props.minutes > 0) {
+            this.setState(state => ({
+                clear_ready: !state.clear_ready,
+            }))
+        }
     }
     
     onCancel = () => {
         if (this.state.clear_ready) {
-            this.setState({
-                clear_ready: false,
-            })
+            this.setState({ clear_ready: false });
         }
     }
     
@@ -172,4 +175,5 @@ export class AppControls extends React.Component<Props, State> {
 export default connect((state: Store) => ({
     rate: state.rate,
     insert: state.insert,
+    minutes: state.minutes,
 }))(AppControls);

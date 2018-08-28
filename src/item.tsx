@@ -50,23 +50,23 @@ export class ItemRow extends React.Component<Props, State> {
         }, 300)
     }
     
-    onDelete = () => {
-        if (this.state.clear_ready) {
+    onDelete = (event: React.SyntheticEvent) => {
+        event.stopPropagation();
+        
+        if (this.state.clear_ready || this.props.minutes == 0) {
             this.props.dispatch({
                 type: 'ITEM_REMOVE',
                 index: this.props.index,
             })
         }
-        this.setState(state => ({
-            clear_ready: !state.clear_ready,
-        }))
+        if (this.props.minutes > 0) {
+            this.setState(state => ({clear_ready: !state.clear_ready}));
+        }
     }
     
     onCancel = () => {
         if (this.state.clear_ready) {
-            this.setState({
-                clear_ready: false,
-            })
+            this.setState({ clear_ready: false });
         }
     }
     
