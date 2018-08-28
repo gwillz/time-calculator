@@ -83,13 +83,14 @@ html {
 
 .control-focus {
     &::before {
-        content: '';
-        position: fixed;
+        animation: fadein 300ms;
         background: rgba(0,0,0,0.7);
+        content: '';
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
+        position: fixed;
         z-index: 100;
     }
     & * {
@@ -109,5 +110,14 @@ html {
 @media all and (max-width: 720px) {
     .section {
         padding: 1rem 0.75em;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
