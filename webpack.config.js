@@ -60,6 +60,8 @@ if (isProduction) {
         new OfflinePlugin({
             externals: [
                 '/index.css',
+                '/img/clock.ico',
+                '/img/clock.png',
             ].concat(
                 fs.readdirSync(ROOT + '/public/webfonts').map(f => ('/webfonts/' + f)),
             )
