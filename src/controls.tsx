@@ -11,7 +11,8 @@ type Props = DispatchProp & {
 }
 
 type State = {
-    [key: string]: string;
+    beginning: string;
+    ending: string;
 }
 
 export class AppControls extends React.Component<Props, State> {
@@ -52,12 +53,14 @@ export class AppControls extends React.Component<Props, State> {
     onInput = (event: React.SyntheticEvent<HTMLInputElement>) => {
         const {name, value, valueAsDate} = event.currentTarget;
         
+        if (!this.state.hasOwnProperty(name)) return;
         if (this.state[name] === value) return;
         if (!(valueAsDate instanceof Date)) return;
         
-        this.setState({
-            [name]: value
-        },
+        this.setState(state => ({
+            ...state,
+            [name]: value,
+        }),
         () => {
             const insert = this.getTime();
             if (insert) {
@@ -67,7 +70,6 @@ export class AppControls extends React.Component<Props, State> {
                 })
             }
         })
-        
     }
     
     onAdd = () => {
