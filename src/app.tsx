@@ -16,7 +16,7 @@ type Props = DispatchProp & {
 
 function Header() {
     return (
-        <div className="hero is-lou">
+        <header className="hero is-lou">
         <div className="hero-body">
         <div className="container is-squished">
             <h1 className="title">
@@ -24,13 +24,13 @@ function Header() {
             </h1>
         </div>
         </div>
-        </div>
+        </header>
     )
 }
 
 function Footer() {
     return (
-        <div className="footer">
+        <footer className="footer">
         <div className="container">
         <div className="content has-text-centered">
             <p>
@@ -46,7 +46,7 @@ function Footer() {
             </p>
         </div>
         </div>
-        </div>
+        </footer>
     )
 }
 
@@ -67,7 +67,7 @@ export class App extends React.Component<Props> {
         return (
             <>
             <Header/>
-            <div className="section container is-squished">
+            <main className="section container is-squished">
                 <table className="table is-fullwidth">
                 <tbody>
                     {items.map((item, i) => (
@@ -97,7 +97,7 @@ export class App extends React.Component<Props> {
                     insert={this.props.insert}
                     minutes={this.props.minutes}
                 />
-            </div>
+            </main>
             <Footer/>
             </>
         )
