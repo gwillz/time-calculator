@@ -6,7 +6,7 @@
   "main": "dist/app.js",
   "scripts": {
     "webpack": "webpack --progress",
-    "assets": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public",
+    "assets": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts assets/* public",
     "clean": "test -e public && rm public/* -r",
     "test": "tape -r ./register.js tests/* | tap-spec",
     "start": "node app.js"
