@@ -7,8 +7,10 @@
   "scripts": {
     "webpack": "webpack --progress",
     "assets": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts assets/* public",
-    "clean": "test -e public && rm public/* -r",
+    "clean": "rm -r public/* || echo clean",
     "test": "tape -r ./register.js tests/* | tap-spec",
+    "deploy": "bash deploy.sh",
+    "pages": "gh-pages -d public",
     "start": "node app.js"
   },
   "author": "Gwilyn Saunders",
@@ -24,6 +26,7 @@
     "css-loader": "^3.5.2",
     "cssnano": "^4.1.10",
     "express": "^4.17.1",
+    "gh-pages": "^2.2.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.9.0",
     "postcss": "^7.0.2",

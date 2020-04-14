@@ -10,12 +10,14 @@ const presetMode = process.env.NODE_ENV || 'development';
 const isProduction = (presetMode === 'production');
 const r = path.resolve.bind(null, __dirname);
 
+/** @type {import('webpack').Configuration} */
 module.exports = {
     entry: {
         index: r('src/index.tsx'),
     },
     output: {
         path: r('public'),
+        filename: isProduction ? '[id].[hash].js' : '[name].js',
     },
     mode: presetMode,
     devtool: isProduction ? false : 'cheap-module-source-map',
@@ -23,6 +25,10 @@ module.exports = {
         splitChunks: {
             chunks: 'all',
         },
+    },
+    performance: {
+        maxAssetSize: 500 * 1000,
+        maxEntrypointSize: 500 * 1000,
     },
     module: {
         rules: [
@@ -58,7 +64,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: r('src/index.html'),
         }),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: isProduction ? '[id].[hash].css' : '[name].css',
+        }),
     ],
 }
 
