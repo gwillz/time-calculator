@@ -1,9 +1,9 @@
 var __wpo = {
   "assets": {
     "main": [
-      "./0.239f96146a5083801f39.css",
-      "./0.239f96146a5083801f39.js",
-      "./1.239f96146a5083801f39.js",
+      "./0.5046fe5baf3780ffbe55.css",
+      "./0.5046fe5baf3780ffbe55.js",
+      "./1.5046fe5baf3780ffbe55.js",
       "./",
       "/index.css",
       "/img/clock.ico",
@@ -48,14 +48,14 @@ var __wpo = {
     "/webfonts/fa-solid-900.woff2"
   ],
   "hashesMap": {
-    "d398c7245cb5fdc36351ab713aadce86902fbc45": "./0.239f96146a5083801f39.css",
-    "6a865cbebdd4db5cba2a73270240f9b4391345bc": "./0.239f96146a5083801f39.js",
-    "92853733033a3ae803da15cd6f2ce59df9624618": "./1.239f96146a5083801f39.js",
-    "b39adf5fe0ac0707bc309220744b7a6a300a386e": "./"
+    "d398c7245cb5fdc36351ab713aadce86902fbc45": "./0.5046fe5baf3780ffbe55.css",
+    "6a865cbebdd4db5cba2a73270240f9b4391345bc": "./0.5046fe5baf3780ffbe55.js",
+    "92853733033a3ae803da15cd6f2ce59df9624618": "./1.5046fe5baf3780ffbe55.js",
+    "66ff8040c9b113b890a766d011d95e196a7ca74d": "./"
   },
   "strategy": "changed",
   "responseStrategy": "cache-first",
-  "version": "4/14/2020, 9:38:03 PM",
+  "version": "4/14/2020, 9:40:12 PM",
   "name": "webpack-offline",
   "pluginVersion": "5.0.5",
   "relativePaths": true
