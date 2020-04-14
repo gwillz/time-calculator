@@ -1,20 +1,21 @@
-const fs = require('fs')
-const path = require('path')
-const webpack = require('webpack')
-const BundleAnalyzerPlugin  = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const OfflinePlugin = require('offline-plugin')
+const fs = require('fs');
+const path = require('path');
+const webpack = require('webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const presetMode = process.env.NODE_ENV || 'development';
 const isProduction = (presetMode === 'production');
-const ROOT = path.resolve(__dirname, '.');
+const r = path.resolve.bind(null, __dirname);
 
 module.exports = {
     entry: {
-        index: ROOT + '/src/index.tsx',
+        index: r('src/index.tsx'),
     },
     output: {
-        path: ROOT + '/public',
+        path: r('public'),
     },
     mode: presetMode,
     devtool: isProduction ? false : 'cheap-module-source-map',
@@ -26,27 +27,38 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(ts|tsx)$/,
-                include: ROOT + '/src',
-                exclude: ROOT + '/node_modules',
+                test: /\.tsx?$/,
+                include: r('src'),
+                exclude: r('node_modules'),
                 loader: 'ts-loader',
                 options: {
                     transpileOnly: false,
-                    configFile: ROOT + '/tsconfig.json',
+                    configFile: r('tsconfig.json'),
                 },
             },
+            {
+                test: /\.css$/,
+                include: r('src'),
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                ],
+            }
         ]
     },
     resolve: {
         extensions: [
             '.js', '.jsx', '.mjs',
             '.ts', '.ts.d', '.tsx',
+            '.css',
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: ROOT + '/src/index.html',
+            template: r('src/index.html'),
         }),
+        new MiniCssExtractPlugin(),
     ],
 }
 
@@ -55,7 +67,7 @@ if (isProduction) {
         new BundleAnalyzerPlugin({
             analyzerMode: 'static',
             openAnalyzer: false,
-            reportFilename: ROOT + '/report.html',
+            reportFilename: r('report.html'),
         }),
         new OfflinePlugin({
             externals: [
@@ -63,7 +75,7 @@ if (isProduction) {
                 '/img/clock.ico',
                 '/img/clock.png',
             ].concat(
-                fs.readdirSync(ROOT + '/public/webfonts').map(f => ('/webfonts/' + f)),
+                fs.readdirSync(r('public/webfonts')).map(f => ('/webfonts/' + f)),
             )
         }),
     ])

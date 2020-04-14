@@ -8,6 +8,9 @@ import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 
 OfflinePluginRuntime.install();
 
+
+import './index.css';
+
 ReactDOM.render((
     <PersistGate loading={Loader()} persistor={persistor}>
         <Provider store={store}>
