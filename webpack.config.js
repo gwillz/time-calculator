@@ -47,7 +47,13 @@ module.exports = {
                 include: r('src'),
                 use: [
                     MiniCssExtractPlugin.loader,
-                    'css-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            url: false,
+                            import: false,
+                        }
+                    },
                     'postcss-loader',
                 ],
             }
